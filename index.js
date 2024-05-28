@@ -19,21 +19,26 @@ const corsoptions = {
         "http://localhost:5173",
         "https://joy-junction-blue.vercel.app",
     ],
+    credentials: true,
 };
+
+app.use(cors(corsoptions));
 
 app.get('/', (req, res)=>{
     res.status(200).send("Server is up and running!");
 });
 
-app.use(cors(corsoptions));
-app.use(function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Methods", "GET, PUT, POST");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    next();
-});
+
 app.use((req, res, next) => {
     console.log("Request Origin:", req.headers.origin);
+    next();
+});
+
+app.use((req, res, next) => {
+    res.header("Access-Control-Allow-Origin", req.headers.origin);
+    res.header("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE, OPTIONS");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    console.log("Response Headers Set:", res.getHeaders());
     next();
 });
 
