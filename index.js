@@ -18,7 +18,7 @@ const corsoptions = {
     origin: [
         "http://localhost:5173",
         "https://joy-junction-blue.vercel.app",
-        "https://joyjunctiongamezone.com/",
+        "https://joyjunctiongamezone.com",
     ],
     credentials: true,
 };
